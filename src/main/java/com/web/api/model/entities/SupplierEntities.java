@@ -1,9 +1,9 @@
 package com.web.api.model.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_supplier")
@@ -13,14 +13,14 @@ public class SupplierEntities implements Serializable {
     @Column(name = "supplier_id")
     private Long supplierId;
     @Column(name = "supplier_name",length = 100,nullable = false)
-    @NotEmpty(message = "Required Supplier name")
     private String supplierName;
     @Column(name = "supplier_address",length =100, nullable = false)
-    @NotEmpty(message = "Required supplier address")
     private String supplierAddress;
     @Column(name = "supplier_email",unique = true,length = 100,nullable = false)
-    @NotEmpty(message = "Required supplier E-Mail")
     private String supplierEmail;
+//    Relationship with product
+    @ManyToMany(mappedBy = "tb_supplier_product")
+    private Set<ProductEntities> productEntities;
 //    Constructor
     public SupplierEntities(Long supplierId,String supplierName, String supplierAddress, String supplierEmail){
         this.supplierId = supplierId;
@@ -62,5 +62,14 @@ public class SupplierEntities implements Serializable {
 
     public void setSupplierEmail(String supplierEmail) {
         this.supplierEmail = supplierEmail;
+    }
+//    Getter Setter Product
+
+    public Set<ProductEntities> getProductEntities() {
+        return productEntities;
+    }
+
+    public void setProductEntities(Set<ProductEntities> productEntities) {
+        this.productEntities = productEntities;
     }
 }
