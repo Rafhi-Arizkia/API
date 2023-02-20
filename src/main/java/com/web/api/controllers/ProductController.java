@@ -6,6 +6,7 @@ import com.web.api.model.entities.SupplierEntities;
 import com.web.api.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
@@ -30,7 +31,7 @@ public class ProductController {
             }
             responData.setStatus(false);
             responData.setPayload(null);
-            return ResponseEntity.badRequest().body(responData);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responData);
         }
         responData.setStatus(true);
         responData.setPayload(productService.saveProduct(productEntities));
@@ -47,7 +48,7 @@ public class ProductController {
             responData.setStatus(false);
             responData.setPayload(null);
             errors.getAllErrors().forEach(error -> responData.getMessages().add(error.getDefaultMessage()));
-            return ResponseEntity.badRequest().body(responData);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responData);
         }
         responData.setStatus(true);
         responData.setPayload(productService.saveProduct(productEntities));
