@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -26,13 +27,13 @@ public class ProductEntities implements Serializable {
     @ManyToOne
     private CategoryEntities categoryEntities;
 //    Relationship with table Supplier
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "tb_product_supplier",
     joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "supplier_id"))
     private Set<SupplierEntities> supplierEntities;
 
-//    Constructor
+    //    Constructor
     public  ProductEntities(Long productId,String productName,String productDescription,Double productPrice){
         this.productId = productId;
         this.productName = productName;
@@ -74,7 +75,8 @@ public class ProductEntities implements Serializable {
     public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
-//    Getter Setter Category
+
+    //    Getter Setter Category
     public CategoryEntities getCategoryEntities() {
         return categoryEntities;
     }
@@ -82,7 +84,8 @@ public class ProductEntities implements Serializable {
     public void setCategoryEntities(CategoryEntities categoryEntities) {
         this.categoryEntities = categoryEntities;
     }
-//    Getter Setter Supplier
+
+    //    Getter Setter Supplier
 
     public Set<SupplierEntities> getSupplierEntities() {
         return supplierEntities;

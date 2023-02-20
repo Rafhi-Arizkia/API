@@ -19,7 +19,7 @@ public class SupplierEntities implements Serializable {
     @Column(name = "supplier_email",unique = true,length = 100,nullable = false)
     private String supplierEmail;
 //    Relationship with product
-    @ManyToMany(mappedBy = "tb_supplier_product")
+    @ManyToMany(mappedBy = "supplierEntities")
     private Set<ProductEntities> productEntities;
 //    Constructor
     public SupplierEntities(Long supplierId,String supplierName, String supplierAddress, String supplierEmail){
