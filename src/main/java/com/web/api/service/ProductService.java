@@ -3,11 +3,11 @@ package com.web.api.service;
 import com.web.api.model.entities.ProductEntities;
 import com.web.api.model.entities.SupplierEntities;
 import com.web.api.model.repo.ProductRepo;
-import com.web.api.model.repo.SupplierRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -15,11 +15,6 @@ import java.util.Set;
 public class ProductService {
 
     private final ProductRepo productRepo;
-    private  SupplierRepo supplierRepo;
-    @Autowired
-    public void setSupplierRepo(SupplierRepo supplierRepo){
-        this.supplierRepo = supplierRepo;
-    }
 
     @Autowired
     public ProductService(ProductRepo productRepo) {
@@ -34,6 +29,13 @@ public class ProductService {
         return productRepo.findAll();
     }
 
+    public ProductEntities findById(Long productId){
+        Optional<ProductEntities> productEntities = productRepo.findById(productId);
+        if (productEntities.isEmpty()){
+            throw new RuntimeException("Invalid product Id:" + productId);
+        }
+        return productEntities.get();
+    }
     public void getDeleteById(Long productId){
         productRepo.deleteById(productId);
     }
@@ -46,6 +48,5 @@ public class ProductService {
         productEntities.getSupplierEntities().add(supplierEntities);
         supplierEntities.getProductEntities().add(productEntities);
     }
-
 
 }

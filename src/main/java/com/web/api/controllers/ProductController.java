@@ -41,8 +41,11 @@ public class ProductController {
             (@Valid  @RequestBody ProductEntities productEntities, Errors errors) {
         ResponData<ProductEntities> responData = new ResponData<>();
         if (errors.hasErrors()) {
+            for (ObjectError error : errors.getAllErrors()) {
+                responData.getMessages().add(error.getDefaultMessage());
+            }
             responData.setStatus(false);
-            responData.getMessages().add("Data tidak valid");
+            responData.setPayload(null);
             errors.getAllErrors().forEach(error -> responData.getMessages().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(responData);
         }
@@ -57,6 +60,11 @@ public class ProductController {
     @GetMapping// get all data
     public Iterable<ProductEntities> getAllProduct(){
         return productService.getAllProduct();
+    }
+
+    @GetMapping("/{productId}")// get data by id
+    public ProductEntities findById(@PathVariable("productId")Long productId){
+        return productService.findById(productId);
     }
     @PostMapping("/{productId}")// add supplier to product
     public void addSupplierToProduct(@PathVariable ("productId")
