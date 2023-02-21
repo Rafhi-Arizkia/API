@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "tb_product")
 public class ProductEntities implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
@@ -25,13 +27,14 @@ public class ProductEntities implements Serializable {
     private Double productPrice;
 //    Relationship with table category
     @ManyToOne
-    private CategoryEntities categoryEntities;
+    @JoinColumn(name = "category_id")
+    private CategoryEntities categoryProduct;
 //    Relationship with table Supplier
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "tb_product_supplier",
     joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "supplier_id"))
-    private Set<SupplierEntities> supplierEntities;
+    private Set<SupplierEntities> supplierProduct;
 
     //    Constructor
     public  ProductEntities(Long productId,String productName,String productDescription,Double productPrice){
@@ -77,21 +80,23 @@ public class ProductEntities implements Serializable {
     }
 
     //    Getter Setter Category
-    public CategoryEntities getCategoryEntities() {
-        return categoryEntities;
+
+    public CategoryEntities getCategoryProduct() {
+        return categoryProduct;
     }
 
-    public void setCategoryEntities(CategoryEntities categoryEntities) {
-        this.categoryEntities = categoryEntities;
+    public void setCategoryProduct(CategoryEntities categoryProduct) {
+        this.categoryProduct = categoryProduct;
     }
+
 
     //    Getter Setter Supplier
 
-    public Set<SupplierEntities> getSupplierEntities() {
-        return supplierEntities;
+    public Set<SupplierEntities> getSupplierProduct() {
+        return supplierProduct;
     }
 
-    public void setSupplierEntities(Set<SupplierEntities> supplierEntities) {
-        this.supplierEntities = supplierEntities;
+    public void setSupplierProduct(Set<SupplierEntities> supplierProduct) {
+        this.supplierProduct = supplierProduct;
     }
 }

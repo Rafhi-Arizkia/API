@@ -43,10 +43,9 @@ public class ProductService {
     public void addSupplier(SupplierEntities supplierEntities, Long productId){
         ProductEntities productEntities = productRepo.findById(productId)
                 .orElseThrow(()-> new RuntimeException("Invalid product Id:" + productId));
-        Set<SupplierEntities> supplierEntitiesSet = productEntities.getSupplierEntities();
+        Set<SupplierEntities> supplierEntitiesSet = productEntities.getSupplierProduct();
         supplierEntitiesSet.add(supplierEntities);
-        productEntities.getSupplierEntities().add(supplierEntities);
-        supplierEntities.getProductEntities().add(productEntities);
+        productEntities.getSupplierProduct().add(supplierEntities);
+        supplierEntities.getProductSupplier().add(productEntities);
     }
-
 }
