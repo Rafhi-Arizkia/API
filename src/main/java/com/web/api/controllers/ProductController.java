@@ -68,8 +68,8 @@ public class ProductController {
         return productService.findById(productId);
     }
     @PostMapping("/{productId}")// add supplier to product
-    public void addSupplierToProduct(@PathVariable ("productId")
-                                         @RequestBody SupplierEntities supplierEntities, Long productId){
+    public void addSupplierToProduct(@PathVariable ("productId") Long productId,
+                                         @RequestBody SupplierEntities supplierEntities){
         productService.addSupplier(supplierEntities,productId);
     }
 

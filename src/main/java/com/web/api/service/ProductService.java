@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,11 +42,20 @@ public class ProductService {
     }
 
     public void addSupplier(SupplierEntities supplierEntities, Long productId){
-        ProductEntities productEntities = productRepo.findById(productId)
-                .orElseThrow(()-> new RuntimeException("Invalid product Id:" + productId));
-        Set<SupplierEntities> supplierEntitiesSet = productEntities.getSupplierProduct();
-        supplierEntitiesSet.add(supplierEntities);
-        productEntities.getSupplierProduct().add(supplierEntities);
-        supplierEntities.getProductSupplier().add(productEntities);
+        Optional<ProductEntities> productEntities = productRepo.findById(productId);
+        if (productEntities.isPresent()){
+            ProductEntities product = productEntities.get();
+            Set<SupplierEntities> supplierEntitiesSet = product.getSupplierProduct();
+            supplierEntitiesSet.add(supplierEntities);
+            product.setSupplierProduct(supplierEntitiesSet);
+            if (supplierEntities.getProductSupplier() == null) {
+                supplierEntities.setProductSupplier(new HashSet<>());
+            }
+            supplierEntities.getProductSupplier().add(product);
+            saveProduct(product);
+        } else {
+            throw new RuntimeException("Invalid product Id:" + productId);
+        }
     }
+
 }
