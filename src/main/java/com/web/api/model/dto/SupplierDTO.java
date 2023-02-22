@@ -1,11 +1,16 @@
 package com.web.api.model.dto;
 
+import com.web.api.model.entities.ProductEntities;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+
+import java.util.HashSet;
+import java.util.Set;
 
 // class ini sama halnya dengan class SupplierEntities
 // tetapi di class ini  hanya mengambil data yang dibutuhkan saja
 public class SupplierDTO {
+    private Long supplierId;
     @NotEmpty(message = "Supplier name is required")
     private String supplierName;
     @NotEmpty(message = "Supplier address is required")
@@ -13,6 +18,18 @@ public class SupplierDTO {
     @NotEmpty(message = "Supplier email is required")
     @Email(message = "Supplier email is invalid")
     private String supplierEmail;
+    private Set<ProductEntities> supplierProduct = new HashSet<>();
+
+    public SupplierDTO(Long supplierId, String supplierName, String supplierAddress, String supplierEmail) {
+        this.supplierId = supplierId;
+        this.supplierName = supplierName;
+        this.supplierAddress = supplierAddress;
+        this.supplierEmail = supplierEmail;
+    }
+    public SupplierDTO() {
+    }
+
+
 
     public String getSupplierName() {
         return supplierName;
@@ -36,5 +53,13 @@ public class SupplierDTO {
 
     public void setSupplierEmail(String supplierEmail) {
         this.supplierEmail = supplierEmail;
+    }
+
+    public Set<ProductEntities> getSupplierProduct() {
+        return supplierProduct;
+    }
+
+    public void setSupplierProduct(Set<ProductEntities> supplierProduct) {
+        this.supplierProduct = supplierProduct;
     }
 }

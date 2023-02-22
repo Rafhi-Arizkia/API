@@ -1,5 +1,6 @@
 package com.web.api.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ public class ProductEntities implements Serializable {
     @NotNull(message = "Required product price")
     private Double productPrice;
 //    Relationship with table category
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryEntities categoryProduct;
@@ -34,6 +36,7 @@ public class ProductEntities implements Serializable {
     @JoinTable(name = "tb_product_supplier",
     joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "supplier_id"))
+    @JsonManagedReference
     private Set<SupplierEntities> supplierProduct;
 
     //    Constructor

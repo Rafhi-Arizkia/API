@@ -7,10 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
 public interface ProductRepo extends JpaRepository<ProductEntities,Long> {
     @Query("SELECT p.supplierProduct FROM ProductEntities p where p.productId =  :productId")
     Set<SupplierEntities>findProductEntitiesByProductId(@Param("productId")Long productId);
+
+//   Menampilkan semua data product
+    @Override
+    List<ProductEntities> findAll();
 }

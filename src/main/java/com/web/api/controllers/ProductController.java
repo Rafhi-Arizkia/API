@@ -21,7 +21,7 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    @PostMapping// create new data
+    @PostMapping(consumes = "application/json", produces = "application/json")// create new data
     public ResponseEntity<ResponData<ProductEntities>>saveProduct
             (@Valid  @RequestBody ProductEntities productEntities, Errors errors) {
         ResponData<ProductEntities> responData = new ResponData<>();
@@ -72,5 +72,4 @@ public class ProductController {
                                          @RequestBody SupplierEntities supplierEntities){
         productService.addSupplier(supplierEntities,productId);
     }
-
 }

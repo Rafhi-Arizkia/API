@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "tb_category")
 public class CategoryEntities implements Serializable {
@@ -15,6 +16,7 @@ public class CategoryEntities implements Serializable {
     private Long categoryId;
     @Column(name = "category_name", length = 100)
     private String categoryName;
+
 //  Constructor
     public CategoryEntities(Long categoryId,String categoryName){
         this.categoryId = categoryId;
