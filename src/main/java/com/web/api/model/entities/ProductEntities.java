@@ -1,6 +1,6 @@
 package com.web.api.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,10 +18,10 @@ public class ProductEntities implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long productId;
-    @Column(name = "product_name",length = 100)
+    @Column(name = "product_name", length = 100)
     @NotEmpty(message = "Required Name Product")
     private String productName;
-    @Column(name = "product_description",length = 150)
+    @Column(name = "product_description", length = 150)
     private String productDescription;
     @Column(name = "product_price")
     @NotNull(message = "Required product price")
@@ -29,27 +29,28 @@ public class ProductEntities implements Serializable {
 //    Relationship with table category
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+//    @JoinColumn(name = "category_id")
     private CategoryEntities categoryProduct;
-//    Relationship with table Supplier
+    //    Relationship with table Supplier
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "tb_product_supplier",
-    joinColumns = @JoinColumn(name = "product_id"),
+            joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "supplier_id"))
-    @JsonManagedReference
+    @JsonIgnoreProperties("productSupplier")
     private Set<SupplierEntities> supplierProduct;
 
     //    Constructor
-    public  ProductEntities(Long productId,String productName,String productDescription,Double productPrice){
+    public ProductEntities(Long productId, String productName, String productDescription, Double productPrice) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
     }
+
     public ProductEntities() {
     }
 
-//    Getter Setter
+    //    Getter Setter
     public Long getProductId() {
         return productId;
     }

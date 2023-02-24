@@ -1,6 +1,6 @@
 package com.web.api.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -24,7 +24,7 @@ public class SupplierEntities implements Serializable {
     private String supplierEmail;
     //    Relationship with product
     @ManyToMany(mappedBy = "supplierProduct")
-    @JsonBackReference
+    @JsonIgnoreProperties("SupplierProduct")
     private Set<ProductEntities> productSupplier;
 
     //    Constructor

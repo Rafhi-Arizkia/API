@@ -41,4 +41,12 @@ public class CategoryEntities implements Serializable {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+//    public List<ProductEntities> getProductCategory() {
+//        return productCategory;
+//    }
+//
+//    public void setProductCategory(List<ProductEntities> productCategory) {
+//        this.productCategory = productCategory;
+//    }
 }
