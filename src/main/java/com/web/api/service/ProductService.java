@@ -3,26 +3,23 @@ package com.web.api.service;
 import com.web.api.model.entities.ProductEntities;
 import com.web.api.model.entities.SupplierEntities;
 import com.web.api.model.repo.ProductRepo;
-import com.web.api.model.repo.SupplierRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
 public class ProductService {
 
     private final ProductRepo productRepo;
-    private final SupplierRepo supplierRepo;
+    private final SupplierService supplierService;
 
     @Autowired
-    public ProductService(ProductRepo productRepo, SupplierRepo supplierRepo) {
+    public ProductService(ProductRepo productRepo,SupplierService supplierService) {
         this.productRepo = productRepo;
-        this.supplierRepo = supplierRepo;
+        this.supplierService = supplierService;
     }
 
     public ProductEntities saveProduct(ProductEntities productEntities) {
@@ -62,4 +59,23 @@ public class ProductService {
         }
     }
 
+    public ProductEntities getProductByName(String name) {
+        return productRepo.findProductByName(name);
+    }
+
+    public List<ProductEntities> getProductByNameLike(String name) {
+        return productRepo.findProductByProductNameLike("%"+name+"%");
+    }
+
+    public List<ProductEntities> getProductByCategory(Long categoryId) {
+        return productRepo.findProductByCategory(categoryId);
+    }
+
+    public List<ProductEntities> findBySupplier(Long supplierId){
+        SupplierEntities supplierEntities = supplierService.findSupplierById(supplierId);
+        if(supplierEntities == null){
+            return new ArrayList<>();
+        }
+        return productRepo.findProductEntitiesBySupplierProduct(supplierEntities);
+    }
 }

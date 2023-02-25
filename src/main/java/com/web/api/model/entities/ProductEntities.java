@@ -29,7 +29,7 @@ public class ProductEntities implements Serializable {
 //    Relationship with table category
 
     @ManyToOne
-//    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id")
     private CategoryEntities categoryProduct;
     //    Relationship with table Supplier
     @ManyToMany(cascade = CascadeType.ALL)
