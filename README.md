@@ -1,4 +1,4 @@
-# Selamat datang di proyek kami yang menggunakan arsitektur REST API. 
+# Selamat datang di proyek saya yang menggunakan arsitektur REST API. 
   Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP.
 # Tentang REST API yang telah dibuat:
 
