@@ -1,21 +1,21 @@
-# Selamat datang di proyek kami yang menggunakan arsitektur REST API. 
+# SELAMAT DATA DI PROYEK SAYA YANG MENGGUNAKAN ARSITEKTUR REST API
   Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP.
 
-# Tentang REST API yang telah dibuat:
+# TENTANG REST API YANG TELAH DIBUAT :
  
-
 *Fitur-fitur utama dari proyek ini meliputi:
 
 * Berbasis Spring Framework, yang terkenal dengan kinerja dan skalabilitas yang tinggi
 * Menggunakan database MySQL server lokal sebagai basis data, yang memberikan fleksibilitas dan kemudahan penggunaan dalam pengembangan proyek
 * Menggunakan JPA Repository
+* Menggunakan ModelMapper 
 * Dapat diakses dengan mudah melalui berbagai platform dan bahasa pemrograman berkat dukungan standar HTTP
 
 * **KENDALA KENDALA SAAT PENGERJAAN PROYEK :
 
 *1.) Kendala saat menggabungkan 2 data di class ProductService yang berelasi ManyToMany(Product dengan Supplier)
    
-   dengan contoh codenya sebagai berikut:
+   - dengan contoh codenya sebagai berikut:
    
       public void addSupplier(SupplierEntities supplierEntities, Long productId){
         Optional<ProductEntities> productEntities = productRepo.findById(productId);
@@ -83,3 +83,5 @@
 Saya berharap proyek ini dapat membantu Anda dalam mempelajari atau belajar bersama dalam membangun REST API. 
 Saya sangat terbuka terhadap masukan dan saran dari kalian untuk terus memperbaiki dan meningkatkan proyek ini. 
 Terima kasih untuk supportnya!
+  
+#Catatan! Code ini akan terus berkembang hingga tahap development selesai
