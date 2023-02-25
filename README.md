@@ -1,6 +1,6 @@
-# **Tentang REST API yang telah dibuat:
+# Tentang REST API yang telah dibuat:
 
-# **Selamat datang di proyek kami yang menggunakan arsitektur REST API. Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP. 
+# Selamat datang di proyek kami yang menggunakan arsitektur REST API. Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP. 
 
 *Fitur-fitur utama dari proyek ini meliputi:
 
