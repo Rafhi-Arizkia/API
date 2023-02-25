@@ -7,7 +7,8 @@
 * Berbasis Spring Framework, yang terkenal dengan kinerja dan skalabilitas yang tinggi
 * Menggunakan database MySQL server lokal sebagai basis data, yang memberikan fleksibilitas dan kemudahan penggunaan 
   dalam pengembangan proyek
-* Menggunakan JPA Repository
+* Menggunakan JPA Repository untuk mengakses data dan manipulasi data
+* Model mapper untukk mengkonversi antara objek entity dan DTO
 * Dapat diakses dengan mudah melalui berbagai platform dan bahasa pemrograman berkat dukungan standar HTTP
 
 # KENDALA KENDALA SAAT PENGERJAAN PROYEK :
@@ -40,7 +41,7 @@
       menggunakan new HashSet<>()
       dan menambahkannya ke SupplierEntities menggunakan method setProductSupplier.
 
-      ini kode yang sudah dieperbarui:
+      ini kode yang sudah diperbarui:
 
         public void addSupplier(SupplierEntities supplierEntities, Long productId) {
           Optional<ProductEntities> productEntities = productRepo.findById(productId);
@@ -59,7 +60,7 @@
           }
       }
 
-*2.) Unsuppoted Media Type (405)
+*2.) Unsupported Media Type (405)
 
       Saat Menggunakan anotasi JsonManageReferance pada table Induk dan JsonBackReferance pada kelas anak itu mengalami error saat menampilkan data dan tambah data
       hingga akhirnya dapat diperbaiki dengan menggunakan JsonIgnoreProperties pada setiap relasi ManyToMany
