@@ -55,7 +55,9 @@ Kendala-Kendala pekerjaan pada proyek ini :
       Saat Menggunakan anotasi JsonManageReferance pada table Induk dan JsonBackReferance pada kelas anak itu mengalami error saat menampilkan data dan tambah data
       hingga akhirnya dapat diperbaiki dengan menggunakan JsonIgnoreProperties pada setiap relasi ManyToMany
       contoh:
-      Pada Kelas ProductEntities
+      
+      Pada Kelas ProductEntities:
+      
       @ManyToMany(cascade = CascadeType.ALL)
       @JoinTable(name = "tb_product_supplier",
               joinColumns = @JoinColumn(name = "product_id"),
@@ -63,7 +65,8 @@ Kendala-Kendala pekerjaan pada proyek ini :
       @JsonIgnoreProperties("productSupplier")
       private Set<SupplierEntities> supplierProduct;
       
-      Pada kelas SupplierEntities
+      Pada kelas SupplierEntities:
+      
       @ManyToMany(mappedBy = "supplierProduct")
       @JsonIgnoreProperties("SupplierProduct")
       private Set<ProductEntities> productSupplier;
