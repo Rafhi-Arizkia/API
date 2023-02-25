@@ -11,7 +11,9 @@ Fitur-fitur utama dari proyek ini meliputi:
 
 Kendala-Kendala pekerjaan pada proyek ini :
 1.)Kendala saat menggabungkan 2 data di class ProductService yang berelasi ManyToMany(Product dengan Supplier)
-     dengan contoh codenya sebagai berikut:
+   
+   dengan contoh codenya sebagai berikut:
+   
       public void addSupplier(SupplierEntities supplierEntities, Long productId){
         Optional<ProductEntities> productEntities = productRepo.findById(productId);
         if (productEntities.isPresent()){
@@ -25,7 +27,8 @@ Kendala-Kendala pekerjaan pada proyek ini :
             throw new RuntimeException("Invalid product Id:" + productId);
         }
       }
-      error yang ditunjukkan =  "Cannot invoke "java.util.Set.add(Object)" because the return value of "com.web.api.model.entities.SupplierEntities.getProductSupplier()" is null"
+      
+      error yang ditunjukkan =  "Cannot invoke "java.util.Set.add(Object)" because the return value of             "com.web.api.model.entities.SupplierEntities.getProductSupplier()" is null"
       menunjukkan bahwa saat memanggil method add() dari objek Set yang diperoleh dari pemanggilan method getProductSupplier() dari objek supplierEntities menghasilkan nilai null.
 
       lalu untuk menangani code tersebut kita harus memeriksa SupplierEntites memiliki set agar tidak null dengan  
