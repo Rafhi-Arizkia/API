@@ -1,17 +1,17 @@
-Tentang REST API yang telah dibuat:
+# **Tentang REST API yang telah dibuat:
 
-Selamat datang di proyek kami yang menggunakan arsitektur REST API. Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP. 
+# **Selamat datang di proyek kami yang menggunakan arsitektur REST API. Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP. 
 
-Fitur-fitur utama dari proyek ini meliputi:
+*Fitur-fitur utama dari proyek ini meliputi:
 
-1.) Berbasis Spring Framework, yang terkenal dengan kinerja dan skalabilitas yang tinggi
-2.) Menggunakan database MySQL server lokal sebagai basis data, yang memberikan fleksibilitas dan kemudahan penggunaan dalam pengembangan proyek
-3.) Menggunakan JPA Repository
-4.) Dapat diakses dengan mudah melalui berbagai platform dan bahasa pemrograman berkat dukungan standar HTTP
+* Berbasis Spring Framework, yang terkenal dengan kinerja dan skalabilitas yang tinggi
+* Menggunakan database MySQL server lokal sebagai basis data, yang memberikan fleksibilitas dan kemudahan penggunaan dalam pengembangan proyek
+* Menggunakan JPA Repository
+* Dapat diakses dengan mudah melalui berbagai platform dan bahasa pemrograman berkat dukungan standar HTTP
 
-Kendala-Kendala pekerjaan pada proyek ini :
+**Kendala-Kendala pekerjaan pada proyek ini :
 
-1.)Kendala saat menggabungkan 2 data di class ProductService yang berelasi ManyToMany(Product dengan Supplier)
+*1.) Kendala saat menggabungkan 2 data di class ProductService yang berelasi ManyToMany(Product dengan Supplier)
    
    dengan contoh codenya sebagai berikut:
    
@@ -55,7 +55,7 @@ Kendala-Kendala pekerjaan pada proyek ini :
           }
       }
 
-2.) Unsuppoted Media Type (405)
+*2.) Unsuppoted Media Type (405)
 
       Saat Menggunakan anotasi JsonManageReferance pada table Induk dan JsonBackReferance pada kelas anak itu mengalami error saat menampilkan data dan tambah data
       hingga akhirnya dapat diperbaiki dengan menggunakan JsonIgnoreProperties pada setiap relasi ManyToMany
