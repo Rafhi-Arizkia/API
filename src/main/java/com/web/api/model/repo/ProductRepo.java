@@ -32,7 +32,4 @@ public interface ProductRepo extends JpaRepository<ProductEntities, Long> {
     @Query("SELECT p from ProductEntities p where :supplierEntities MEMBER OF p.supplierProduct")
     public List<ProductEntities> findProductEntitiesBySupplierProduct(@PathParam("supplierEntities") SupplierEntities supplierEntities);
 
-    //   Menampilkan semua data product
-    @Override
-    List<ProductEntities> findAll();
 }
