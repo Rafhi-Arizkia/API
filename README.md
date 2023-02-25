@@ -1,6 +1,8 @@
-# Tentang REST API yang telah dibuat:
+# Selamat datang di proyek kami yang menggunakan arsitektur REST API. 
+  Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP.
 
-# Selamat datang di proyek kami yang menggunakan arsitektur REST API. Proyek ini memungkinkan Anda untuk mengakses sumber daya secara efisien melalui protokol HTTP. 
+# Tentang REST API yang telah dibuat:
+ 
 
 *Fitur-fitur utama dari proyek ini meliputi:
 
@@ -9,7 +11,7 @@
 * Menggunakan JPA Repository
 * Dapat diakses dengan mudah melalui berbagai platform dan bahasa pemrograman berkat dukungan standar HTTP
 
-**Kendala-Kendala pekerjaan pada proyek ini :
+* **KENDALA KENDALA SAAT PENGERJAAN PROYEK :
 
 *1.) Kendala saat menggabungkan 2 data di class ProductService yang berelasi ManyToMany(Product dengan Supplier)
    
