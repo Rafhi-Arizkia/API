@@ -17,15 +17,16 @@ public class CategoryEntities implements Serializable {
     @Column(name = "category_name", length = 100)
     private String categoryName;
 
-//  Constructor
-    public CategoryEntities(Long categoryId,String categoryName){
+    //  Constructor
+    public CategoryEntities(Long categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
+
     public CategoryEntities() {
     }
 
-//    Getter Setter
+    //    Getter Setter
     public Long getCategoryId() {
         return categoryId;
     }

@@ -19,6 +19,7 @@ public class SupplierController {
 
     private final ModelMapper modelMapper;
     private final SupplierService supplierService;
+
     @Autowired  // constructor untuk injection claas SupplierService dan ModelMapper
     public SupplierController(ModelMapper modelMapper, SupplierService supplierService) {
         this.modelMapper = modelMapper;
@@ -27,10 +28,10 @@ public class SupplierController {
 
     @PostMapping// method untuk add data supplier
     public ResponseEntity<ResponData<SupplierEntities>> saveSupplier
-            (@Valid @RequestBody SupplierDTO supplierDTO,  Errors errors){
+            (@Valid @RequestBody SupplierDTO supplierDTO, Errors errors) {
         ResponData<SupplierEntities> responData = new ResponData<>();
-        if (errors.hasErrors()){
-            for (ObjectError error : errors.getAllErrors()){
+        if (errors.hasErrors()) {
+            for (ObjectError error : errors.getAllErrors()) {
                 responData.getMessages().add(error.getDefaultMessage());
             }
             responData.setStatus(false);
@@ -42,12 +43,13 @@ public class SupplierController {
         responData.setPayload(supplierService.saveSupplier(supplierEntities));
         return ResponseEntity.ok(responData);
     }
+
     @PutMapping// method untuk update data supplier
     public ResponseEntity<ResponData<SupplierEntities>> updateSupplier
-            (@Valid @RequestBody SupplierDTO supplierDTO,  Errors errors){
+            (@Valid @RequestBody SupplierDTO supplierDTO, Errors errors) {
         ResponData<SupplierEntities> responData = new ResponData<>();
-        if (errors.hasErrors()){
-            for (ObjectError error : errors.getAllErrors()){
+        if (errors.hasErrors()) {
+            for (ObjectError error : errors.getAllErrors()) {
                 responData.getMessages().add(error.getDefaultMessage());
             }
             responData.setStatus(false);
@@ -60,15 +62,16 @@ public class SupplierController {
         responData.setPayload(supplierService.saveSupplier(supplierEntities));
         return ResponseEntity.ok(responData);
     }
+
     @GetMapping // method untuk menampilkan data supplier
-    public Iterable<SupplierEntities> getAllSupplier(){
+    public Iterable<SupplierEntities> getAllSupplier() {
         return supplierService.showAllSupplier();
     }
 
     @GetMapping("/{productId}") // method untuk menampilkan data supplier berdasarkan id
-    public ResponseEntity<SupplierEntities> findSupplierById(@PathVariable Long productId){
+    public ResponseEntity<SupplierEntities> findSupplierById(@PathVariable Long productId) {
         SupplierEntities supplierEntities = supplierService.findSupplierById(productId);
-        if (supplierEntities != null){
+        if (supplierEntities != null) {
             return ResponseEntity.ok().body(supplierEntities);
         } else {
             return ResponseEntity.notFound().build();
@@ -80,8 +83,9 @@ public class SupplierController {
         // (Not Found),
         // menandakan bahwa data tidak dapat ditemukan.
     }
+
     @DeleteMapping("/{productId}") // method untuk menghapus data supplier berdasarkan id
-    public void deleteSupplierById(@PathVariable Long productId){
+    public void deleteSupplierById(@PathVariable Long productId) {
         supplierService.deleteSupplierById(productId);
     }
 }

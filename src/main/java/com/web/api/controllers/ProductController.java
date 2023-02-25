@@ -26,9 +26,9 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")// create new data
+    // create new data
     public ResponseEntity<ResponData<ProductEntities>> saveProduct
-            (@Valid @RequestBody ProductEntities productEntities, Errors errors) {
+    (@Valid @RequestBody ProductEntities productEntities, Errors errors) {
         ResponData<ProductEntities> responData = new ResponData<>();
         if (errors.hasErrors()) {
             for (ObjectError error : errors.getAllErrors()) {
@@ -91,6 +91,7 @@ public class ProductController {
     public List<ProductEntities> getFindProductByName(@RequestBody SearchData searchData) {
         return productService.getProductByNameLike(searchData.getSearchKey());
     }
+
     @GetMapping("/search/category/{categoryId}")
     public List<ProductEntities> getProductByCategory(@PathVariable("categoryId") Long categoryId) {
         return productService.getProductByCategory(categoryId);

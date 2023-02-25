@@ -19,6 +19,7 @@ public class ProductSupplierDTO {
         this.productPrice = productPrice;
         this.supplierProduct = supplierProduct;
     }
+
     public ProductSupplierDTO(Long productId, String productName, String productDescription, Double productPrice, List<SupplierDTO> supplierDTOs) {
     }
 

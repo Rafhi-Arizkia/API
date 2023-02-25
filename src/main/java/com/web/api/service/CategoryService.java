@@ -19,24 +19,28 @@ public class CategoryService {
     public CategoryService(CategoryRepo categoryRepo) {
         this.categoryRepo = categoryRepo;
     }
+
     // Method  saveCategory untuk menyimpan data category
-    public CategoryEntities saveCategory(CategoryEntities categoryEntities){
+    public CategoryEntities saveCategory(CategoryEntities categoryEntities) {
         return categoryRepo.save(categoryEntities);
     }
+
     // Method findById untuk menampilkan data category berdasarkan id
-    public CategoryEntities findById(Long categoryId){
+    public CategoryEntities findById(Long categoryId) {
         Optional<CategoryEntities> categoryEntities = categoryRepo.findById(categoryId);
-        if (categoryEntities.isEmpty()){
+        if (categoryEntities.isEmpty()) {
             throw new RuntimeException("Invalid category Id:" + categoryId);
         }
-        return  categoryEntities.get();
+        return categoryEntities.get();
     }
+
     // Method menampilkan semua data category
-    public Iterable<CategoryEntities> showAllCategory(){
+    public Iterable<CategoryEntities> showAllCategory() {
         return categoryRepo.findAll();
     }
+
     // Method deleteById untuk menghapus data category berdasarkan id
-    public void deleteById(Long categoryId){
+    public void deleteById(Long categoryId) {
         categoryRepo.deleteById(categoryId);
     }
 

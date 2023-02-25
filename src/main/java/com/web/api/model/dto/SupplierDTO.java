@@ -10,7 +10,7 @@ import java.util.Set;
 // class ini sama halnya dengan class SupplierEntities
 // tetapi di class ini  hanya mengambil data yang dibutuhkan saja
 public class SupplierDTO {
-    private Long supplierId;
+
     @NotEmpty(message = "Supplier name is required")
     private String supplierName;
     @NotEmpty(message = "Supplier address is required")
@@ -20,15 +20,14 @@ public class SupplierDTO {
     private String supplierEmail;
     private Set<ProductEntities> supplierProduct = new HashSet<>();
 
-    public SupplierDTO(Long supplierId, String supplierName, String supplierAddress, String supplierEmail) {
-        this.supplierId = supplierId;
+    public SupplierDTO(String supplierName, String supplierAddress, String supplierEmail) {
         this.supplierName = supplierName;
         this.supplierAddress = supplierAddress;
         this.supplierEmail = supplierEmail;
     }
+
     public SupplierDTO() {
     }
-
 
 
     public String getSupplierName() {

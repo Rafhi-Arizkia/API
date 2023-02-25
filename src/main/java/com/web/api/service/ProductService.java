@@ -17,7 +17,7 @@ public class ProductService {
     private final SupplierService supplierService;
 
     @Autowired
-    public ProductService(ProductRepo productRepo,SupplierService supplierService) {
+    public ProductService(ProductRepo productRepo, SupplierService supplierService) {
         this.productRepo = productRepo;
         this.supplierService = supplierService;
     }
@@ -64,16 +64,16 @@ public class ProductService {
     }
 
     public List<ProductEntities> getProductByNameLike(String name) {
-        return productRepo.findProductByProductNameLike("%"+name+"%");
+        return productRepo.findProductByProductNameLike("%" + name + "%");
     }
 
     public List<ProductEntities> getProductByCategory(Long categoryId) {
         return productRepo.findProductByCategory(categoryId);
     }
 
-    public List<ProductEntities> findBySupplier(Long supplierId){
+    public List<ProductEntities> findBySupplier(Long supplierId) {
         SupplierEntities supplierEntities = supplierService.findSupplierById(supplierId);
-        if(supplierEntities == null){
+        if (supplierEntities == null) {
             return new ArrayList<>();
         }
         return productRepo.findProductEntitiesBySupplierProduct(supplierEntities);

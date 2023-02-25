@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SupplierRepo extends JpaRepository<SupplierEntities,Long> {
+public interface SupplierRepo extends JpaRepository<SupplierEntities, Long> {
 
-//    Mennampilkan semua data supplier
+    //    Mennampilkan semua data supplier
     @Override
     List<SupplierEntities> findAll();
 }
