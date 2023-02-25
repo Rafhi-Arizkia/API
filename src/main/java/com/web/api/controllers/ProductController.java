@@ -27,6 +27,7 @@ public class ProductController {
     }
 
     // create new data
+    @PostMapping
     public ResponseEntity<ResponData<ProductEntities>> saveProduct
     (@Valid @RequestBody ProductEntities productEntities, Errors errors) {
         ResponData<ProductEntities> responData = new ResponData<>();
