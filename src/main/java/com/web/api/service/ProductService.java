@@ -59,6 +59,7 @@ public class ProductService {
         }
     }
 
+//    Ini menggunakan SQL Query
     public ProductEntities getProductByName(String name) {
         return productRepo.findProductByName(name);
     }
