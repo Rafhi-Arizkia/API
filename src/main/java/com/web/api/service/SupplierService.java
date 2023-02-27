@@ -53,4 +53,11 @@ public class SupplierService {
         return supplierRepo.findBySupplierNameContains(supplierName);
     }
 
+    public List<SupplierEntities> findSupplierNameByPrefix(String prefix){
+        return supplierRepo.findBySupplierNameStartingWith(prefix);
+    }
+
+    public List<SupplierEntities> findSupplierByNameOrEmail(String supplierName,String supplierEmail){
+        return supplierRepo.findBySupplierNameContainsOrSupplierEmailContains(supplierName,supplierEmail);
+    }
 }

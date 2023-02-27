@@ -101,4 +101,14 @@ public class SupplierController {
     public List<SupplierEntities> findSupplierName(@RequestBody SearchData searchData){
         return supplierService.findSupplierByName(searchData.getSearchKey());
     }
+
+    @PostMapping("/name/prefix")
+    public List<SupplierEntities> findSupplierNamePrefix(@RequestBody SearchData searchData){
+        return supplierService.findSupplierNameByPrefix(searchData.getSearchKey());
+    }
+
+    @PostMapping("/nameoremail")
+    public List<SupplierEntities>findSupplierNameOrEmail(@RequestBody SearchData searchData){
+        return supplierService.findSupplierByNameOrEmail(searchData.getSearchKey(), searchData.getOtherKey());
+    }
 }
