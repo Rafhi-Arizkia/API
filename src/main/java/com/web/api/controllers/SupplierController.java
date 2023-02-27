@@ -1,6 +1,7 @@
 package com.web.api.controllers;
 
 import com.web.api.model.dto.ResponData;
+import com.web.api.model.dto.SearchData;
 import com.web.api.model.dto.SupplierDTO;
 import com.web.api.model.entities.SupplierEntities;
 import com.web.api.service.SupplierService;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/supplier")
@@ -87,5 +90,15 @@ public class SupplierController {
     @DeleteMapping("/{productId}") // method untuk menghapus data supplier berdasarkan id
     public void deleteSupplierById(@PathVariable Long productId) {
         supplierService.deleteSupplierById(productId);
+    }
+
+//    End Point untuk derived method
+    @PostMapping("/email")
+    public SupplierEntities findSupplierEmail(@RequestBody SearchData searchData){
+        return supplierService.findSupplierByEmail(searchData.getSearchKey());
+    }
+    @PostMapping("/name")
+    public List<SupplierEntities> findSupplierName(@RequestBody SearchData searchData){
+        return supplierService.findSupplierByName(searchData.getSearchKey());
     }
 }

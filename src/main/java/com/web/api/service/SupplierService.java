@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -43,5 +44,13 @@ public class SupplierService {
         supplierRepo.deleteById(supplierId);
     }
 
+//    Ini menggunakan derived method
+    public SupplierEntities findSupplierByEmail(String supplierEmail){
+        return supplierRepo.findBySupplierEmail(supplierEmail);
+    }
+
+    public List<SupplierEntities> findSupplierByName(String supplierName){
+        return supplierRepo.findBySupplierNameContains(supplierName);
+    }
 
 }
