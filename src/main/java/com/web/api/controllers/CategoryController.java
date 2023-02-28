@@ -2,16 +2,22 @@ package com.web.api.controllers;
 
 import com.web.api.model.dto.CategoryDTO;
 import com.web.api.model.dto.ResponData;
+import com.web.api.model.dto.SearchData;
 import com.web.api.model.entities.CategoryEntities;
 import com.web.api.service.CategoryService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/category")
@@ -82,4 +88,35 @@ public class CategoryController {
     public void deleteById(@PathVariable("categoryId") Long categoryId) {
         categoryService.deleteById(categoryId);
     }
+
+    //    Method paging and sorting
+    @PostMapping("/search/{size}/{pages}")
+    public Iterable<CategoryEntities> findCategoryByPage(@RequestBody SearchData searchData,
+                                                         @PathVariable("size") int size, @PathVariable("pages")
+                                                         int pages) {
+        Pageable pageable = PageRequest.of(pages, size);
+        return categoryService.findCategoryByPage(searchData.getSearchKey(), pageable);
+    }
+
+    @PostMapping("/search/{size}/{pages}/{sort}")
+    public Iterable<CategoryEntities> findCategoryByPage2(@RequestBody SearchData searchData,
+                                                          @PathVariable("size") int size, @PathVariable("pages")
+                                                          int pages,
+                                                          @PathVariable("sort") String sort) {
+        Pageable pageable = PageRequest.of(pages, size, Sort.by("categoryId"));
+//        Jika data diatas menghasilkan ascending maka akan bisa diubah dengan descending
+        if (sort.equalsIgnoreCase("desc")) {
+            pageable = PageRequest.of(pages, size, Sort.by("categoryId").descending());
+        }
+        return categoryService.findCategoryByPage(searchData.getSearchKey(), pageable);
+    }
+    @PostMapping("/all")
+    public ResponseEntity<ResponData<Iterable<CategoryEntities>>> createAllCategory(
+            @RequestBody CategoryEntities categoryEntities){
+        ResponData<Iterable<CategoryEntities>> responData = new ResponData<>();
+        responData.setPayload(categoryService.saveAllCategory(Collections.singletonList(categoryEntities)));
+        responData.setStatus(true);
+        return ResponseEntity.ok(responData);
+    }
 }
+

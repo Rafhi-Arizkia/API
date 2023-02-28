@@ -4,6 +4,7 @@ import com.web.api.model.entities.CategoryEntities;
 import com.web.api.model.repo.CategoryRepo;
 import jakarta.transaction.TransactionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -42,6 +43,16 @@ public class CategoryService {
     // Method deleteById untuk menghapus data category berdasarkan id
     public void deleteById(Long categoryId) {
         categoryRepo.deleteById(categoryId);
+    }
+
+    //    Paging and Sorting
+    public Iterable<CategoryEntities> findCategoryByPage(String categoryName, Pageable pageable) {
+        return categoryRepo.findByCategoryNameContains(categoryName, pageable);
+    }
+
+//    Untuk menyimpan data category dalam jumlah banyak
+    public Iterable<CategoryEntities> saveAllCategory(Iterable<CategoryEntities> categoryEntities){
+        return categoryRepo.saveAll(categoryEntities);
     }
 
 }
