@@ -1,4 +1,4 @@
-package com.web.api.model.dto;
+package com.web.api.dto;
 
 import com.web.api.model.entities.ProductEntities;
 import jakarta.validation.constraints.Email;

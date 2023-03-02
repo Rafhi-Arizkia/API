@@ -1,4 +1,4 @@
-package com.web.api.model.dto;
+package com.web.api.dto;
 
 import java.util.HashSet;
 import java.util.List;

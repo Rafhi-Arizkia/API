@@ -1,7 +1,7 @@
 package com.web.api.controllers;
 
-import com.web.api.model.dto.ResponData;
-import com.web.api.model.dto.SearchData;
+import com.web.api.dto.ResponData;
+import com.web.api.dto.SearchData;
 import com.web.api.model.entities.ProductEntities;
 import com.web.api.model.entities.SupplierEntities;
 import com.web.api.service.ProductService;

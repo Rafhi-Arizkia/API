@@ -1,8 +1,8 @@
 package com.web.api.controllers;
 
-import com.web.api.model.dto.CategoryDTO;
-import com.web.api.model.dto.ResponData;
-import com.web.api.model.dto.SearchData;
+import com.web.api.dto.CategoryDTO;
+import com.web.api.dto.ResponData;
+import com.web.api.dto.SearchData;
 import com.web.api.model.entities.CategoryEntities;
 import com.web.api.service.CategoryService;
 import jakarta.validation.Valid;
@@ -17,7 +17,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/category")
@@ -114,7 +114,7 @@ public class CategoryController {
     public ResponseEntity<ResponData<Iterable<CategoryEntities>>> createAllCategory(
             @RequestBody CategoryEntities categoryEntities){
         ResponData<Iterable<CategoryEntities>> responData = new ResponData<>();
-        responData.setPayload(categoryService.saveAllCategory(Collections.singletonList(categoryEntities)));
+        responData.setPayload(categoryService.saveAllCategory(Arrays.asList(categoryEntities)));
         responData.setStatus(true);
         return ResponseEntity.ok(responData);
     }
