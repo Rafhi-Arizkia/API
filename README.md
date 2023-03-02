@@ -80,7 +80,10 @@
       @ManyToMany(mappedBy = "supplierProduct")
       @JsonIgnoreProperties("SupplierProduct")
       private Set<ProductEntities> productSupplier;
-      
+
+*3.) Tidak dapat menggunakan swagger 
+      Karena saya menggunakan Spring Boot versi 3.0.2 tidak dapat meggunakan swagger
+      dan dapat menggunakan springdoc-api
       
 
 Saya berharap proyek ini dapat membantu Anda dalam mempelajari atau belajar bersama dalam membangun REST API. 
