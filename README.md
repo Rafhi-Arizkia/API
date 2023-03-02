@@ -81,11 +81,11 @@
       @JsonIgnoreProperties("SupplierProduct")
       private Set<ProductEntities> productSupplier;
 
-*3.) Tidak dapat menggunakan swagger 
-      Karena saya menggunakan Spring Boot versi 3.0.2 tidak dapat meggunakan swagger
-      dan dapat menggunakan springdoc-api
+*3.) Tidak dapat menggunakan swagger Karena saya menggunakan Spring Boot versi 3.0.2
+      dan sebagai gantinya dapat menggunakan documentasi API dengan springdoc-api (https://springdoc.org/v2/)
       
 
+=======================================================
 Saya berharap proyek ini dapat membantu Anda dalam mempelajari atau belajar bersama dalam membangun REST API. 
 Saya sangat terbuka terhadap masukan dan saran dari kalian untuk terus memperbaiki dan meningkatkan proyek ini. 
 Terima kasih untuk supportnya!
