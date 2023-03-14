@@ -11,6 +11,7 @@
 * Model mapper untukk mengkonversi antara objek entity dan DTO
 * Menggunakan Spring Security
 * Menggunakan Jwt(Json Web Token)
+* Auditing data (Auditing data adalah proses pencatatan dan pemantauan aktivitas penggunaan data dalam sebuah sistem informasi.)
 * Dapat diakses dengan mudah melalui berbagai platform dan bahasa pemrograman berkat dukungan standar HTTP
 
 # KENDALA KENDALA SAAT PENGERJAAN PROYEK :
