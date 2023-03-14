@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.webjars.NotFoundException;
 
 import java.util.Arrays;
 
@@ -32,7 +33,11 @@ public class CategoryController {
         this.modelMapper = modelMapper;
     }
 
-    //    Method untuk menambahkan data category
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
     @PostMapping
     public ResponseEntity<ResponData<CategoryEntities>> create(@Valid @RequestBody
                                                                CategoryDTO categoryDTO, Errors errors) {
