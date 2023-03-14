@@ -9,6 +9,8 @@
   dalam pengembangan proyek
 * Menggunakan JPA Repository untuk mengakses data dan manipulasi data
 * Model mapper untukk mengkonversi antara objek entity dan DTO
+* Menggunakan Spring Security
+* Menggunakan Jwt(Json Web Token)
 * Dapat diakses dengan mudah melalui berbagai platform dan bahasa pemrograman berkat dukungan standar HTTP
 
 # KENDALA KENDALA SAAT PENGERJAAN PROYEK :
