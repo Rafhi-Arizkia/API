@@ -5,6 +5,7 @@ import com.web.api.model.repo.SupplierRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,18 @@ public class SupplierService {
 
     //    Method untuk menambahkan data supplier
     public SupplierEntities saveSupplier(SupplierEntities supplierEntities) {
+        if (supplierEntities.getSupplierId() != null) {
+            SupplierEntities supplierEntities1 = supplierRepo.findById(supplierEntities.getSupplierId())
+                    .orElseThrow(() -> new NotFoundException(
+                            "" + "{\"error\":\"Not found product with Id\"" + supplierEntities.getSupplierId() + "\"}")
+                    );
+            supplierEntities1.setSupplierName(supplierEntities.getSupplierName());
+            supplierEntities1.setSupplierEmail(supplierEntities.getSupplierName());
+            supplierEntities1.setSupplierAddress(supplierEntities.getSupplierName());
+            supplierEntities1.setProductSupplier(supplierEntities.getProductSupplier());
+
+            supplierEntities1 = supplierEntities;
+        }
         return supplierRepo.save(supplierEntities);
     }
 
@@ -44,20 +57,20 @@ public class SupplierService {
         supplierRepo.deleteById(supplierId);
     }
 
-//    Ini menggunakan derived method
-    public SupplierEntities findSupplierByEmail(String supplierEmail){
+    //    Ini menggunakan derived method
+    public SupplierEntities findSupplierByEmail(String supplierEmail) {
         return supplierRepo.findBySupplierEmail(supplierEmail);
     }
 
-    public List<SupplierEntities> findSupplierByName(String supplierName){
+    public List<SupplierEntities> findSupplierByName(String supplierName) {
         return supplierRepo.findBySupplierNameContains(supplierName);
     }
 
-    public List<SupplierEntities> findSupplierNameByPrefix(String prefix){
+    public List<SupplierEntities> findSupplierNameByPrefix(String prefix) {
         return supplierRepo.findBySupplierNameStartingWith(prefix);
     }
 
-    public List<SupplierEntities> findSupplierByNameOrEmail(String supplierName,String supplierEmail){
-        return supplierRepo.findBySupplierNameContainsOrSupplierEmailContains(supplierName,supplierEmail);
+    public List<SupplierEntities> findSupplierByNameOrEmail(String supplierName, String supplierEmail) {
+        return supplierRepo.findBySupplierNameContainsOrSupplierEmailContains(supplierName, supplierEmail);
     }
 }

@@ -6,6 +6,7 @@ import com.web.api.model.repo.ProductRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.*;
 
@@ -23,6 +24,19 @@ public class ProductService {
     }
 
     public ProductEntities saveProduct(ProductEntities productEntities) {
+        if (productEntities.getProductId()!=null){
+            // untuk melakukan update
+            ProductEntities productEntities1 = productRepo.findById(productEntities.getProductId())
+                    .orElseThrow(()-> new NotFoundException("" +
+                            "{\"error\":\"Not found product with Id\"" +productEntities.getProductId()+ "\"}"));
+            productEntities1.setSupplierProduct(productEntities.getSupplierProduct());
+            productEntities1.setCategoryProduct(productEntities.getCategoryProduct());
+            productEntities1.setProductName(productEntities.getProductName());
+            productEntities1.setProductDescription(productEntities.getProductDescription());
+            productEntities1.setProductPrice(productEntities.getProductPrice());
+
+            productEntities1 = productEntities;
+        }
         return productRepo.save(productEntities);
     }
 
