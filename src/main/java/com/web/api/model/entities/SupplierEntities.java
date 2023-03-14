@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_supplier")
-public class SupplierEntities implements Serializable {
+public class SupplierEntities extends BaseEntities<String> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
@@ -64,7 +64,7 @@ public class SupplierEntities implements Serializable {
     }
 
     public String getSupplierEmail() {
-        return supplierEmail;
+        return this.supplierEmail;
     }
 
     public void setSupplierEmail(String supplierEmail) {

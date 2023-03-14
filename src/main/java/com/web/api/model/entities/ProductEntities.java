@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_product")
-public class ProductEntities implements Serializable {
+public class ProductEntities extends BaseEntities<String> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
