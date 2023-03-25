@@ -5,6 +5,10 @@ import com.web.api.model.entities.SupplierEntities;
 import com.web.api.model.repo.ProductRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -12,6 +16,7 @@ import java.util.*;
 
 @Service
 @Transactional
+@CacheConfig(cacheNames = "product")
 public class ProductService {
 
     private final ProductRepo productRepo;
@@ -23,12 +28,14 @@ public class ProductService {
         this.supplierService = supplierService;
     }
 
+    @CachePut(value = "productSave", key = "#productEntities.productName")
+    // cache put untuk menandai method yang akan di save atau update
     public ProductEntities saveProduct(ProductEntities productEntities) {
-        if (productEntities.getProductId()!=null){
+        if (productEntities.getProductId() != null) {
             // untuk melakukan update
             ProductEntities productEntities1 = productRepo.findById(productEntities.getProductId())
-                    .orElseThrow(()-> new NotFoundException("" +
-                            "{\"error\":\"Not found product with Id\"" +productEntities.getProductId()+ "\"}"));
+                    .orElseThrow(() -> new NotFoundException("" +
+                            "{\"error\":\"Not found product with Id\"" + productEntities.getProductId() + "\"}"));
             productEntities1.setSupplierProduct(productEntities.getSupplierProduct());
             productEntities1.setCategoryProduct(productEntities.getCategoryProduct());
             productEntities1.setProductName(productEntities.getProductName());
@@ -44,6 +51,9 @@ public class ProductService {
         return productRepo.findAll();
     }
 
+    @Cacheable(value = "productFind", key = "productId") // anotasi ini digunakan untuk menandai method yang akan di-cache.
+    // Ketika method ini dipanggil dengan parameter yang sama, maka hasil dari method tersebut akan diambil dari cache
+    // dan tidak dieksekusi lagi
     public ProductEntities findById(Long productId) {
         Optional<ProductEntities> productEntities = productRepo.findById(productId);
         if (productEntities.isEmpty()) {
@@ -52,6 +62,11 @@ public class ProductService {
         return productEntities.get();
     }
 
+    @CacheEvict(value = "productDelete", allEntries = true)
+//    anotasi ini digunakan untuk menandai method yang akan menghapus data pada cache. Ketika method ini dipanggil,
+//    maka data pada cache dengan key yang sesuai akan dihapus. Anotasi ini memiliki parameter value yang menunjukkan
+//    nama cache yang digunakan untuk menyimpan data, dan parameter allEntries yang menunjukkan apakah semua data pada
+//    ache akan dihapus atau hanya data dengan key tertentu saja.
     public void getDeleteById(Long productId) {
         productRepo.deleteById(productId);
     }
@@ -73,7 +88,7 @@ public class ProductService {
         }
     }
 
-//    Ini menggunakan SQL Query
+    //    Ini menggunakan SQL Query
     public ProductEntities getProductByName(String name) {
         return productRepo.findProductByName(name);
     }

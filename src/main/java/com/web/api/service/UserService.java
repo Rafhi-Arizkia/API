@@ -8,6 +8,8 @@ import com.web.api.model.entities.UserRole;
 import com.web.api.model.repo.UserRepo;
 import com.web.api.security.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +25,7 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 @Service
+@CacheConfig(cacheNames = "user")
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepo userRepo;
@@ -72,6 +75,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    @Cacheable(value = "userLogin", key = "#request.getEmail()")
     public AuthResponse authenticate(LoginRequest request) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
