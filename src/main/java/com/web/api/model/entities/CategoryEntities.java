@@ -1,10 +1,16 @@
 package com.web.api.model.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_category")
 public class CategoryEntities extends BaseEntities<String> implements Serializable {
@@ -17,37 +23,5 @@ public class CategoryEntities extends BaseEntities<String> implements Serializab
     @Column(name = "category_name", length = 100)
     private String categoryName;
 
-    //  Constructor
-    public CategoryEntities(Long categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-    }
 
-    public CategoryEntities() {
-    }
-
-    //    Getter Setter
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-//    public List<ProductEntities> getProductCategory() {
-//        return productCategory;
-//    }
-//
-//    public void setProductCategory(List<ProductEntities> productCategory) {
-//        this.productCategory = productCategory;
-//    }
 }
