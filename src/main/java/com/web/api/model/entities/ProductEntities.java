@@ -4,12 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "tb_product")
 public class ProductEntities extends BaseEntities<String> implements Serializable {
     @Serial
@@ -40,6 +47,7 @@ public class ProductEntities extends BaseEntities<String> implements Serializabl
     private Set<SupplierEntities> supplierProduct;
 
     //    Constructor
+    @Builder
     public ProductEntities(Long productId, String productName, String productDescription, Double productPrice) {
         this.productId = productId;
         this.productName = productName;
@@ -47,60 +55,4 @@ public class ProductEntities extends BaseEntities<String> implements Serializabl
         this.productPrice = productPrice;
     }
 
-    public ProductEntities() {
-    }
-
-    //    Getter Setter
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
-    public Double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    //    Getter Setter Category
-
-    public CategoryEntities getCategoryProduct() {
-        return categoryProduct;
-    }
-
-    public void setCategoryProduct(CategoryEntities categoryProduct) {
-        this.categoryProduct = categoryProduct;
-    }
-
-
-    //    Getter Setter Supplier
-
-    public Set<SupplierEntities> getSupplierProduct() {
-        return supplierProduct;
-    }
-
-    public void setSupplierProduct(Set<SupplierEntities> supplierProduct) {
-        this.supplierProduct = supplierProduct;
-    }
 }
