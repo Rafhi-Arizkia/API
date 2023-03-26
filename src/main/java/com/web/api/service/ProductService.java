@@ -5,10 +5,7 @@ import com.web.api.model.entities.SupplierEntities;
 import com.web.api.model.repo.ProductRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
@@ -28,7 +25,7 @@ public class ProductService {
         this.supplierService = supplierService;
     }
 
-    @CachePut(value = "productSave", key = "#productEntities.productName")
+    @CachePut(value = "product", key = "#productEntities.productName")
     // cache put untuk menandai method yang akan di save atau update
     public ProductEntities saveProduct(ProductEntities productEntities) {
         if (productEntities.getProductId() != null) {
@@ -51,7 +48,7 @@ public class ProductService {
         return productRepo.findAll();
     }
 
-    @Cacheable(value = "productFind", key = "productId") // anotasi ini digunakan untuk menandai method yang akan di-cache.
+    @Cacheable(value = "product", key = "productId") // anotasi ini digunakan untuk menandai method yang akan di-cache.
     // Ketika method ini dipanggil dengan parameter yang sama, maka hasil dari method tersebut akan diambil dari cache
     // dan tidak dieksekusi lagi
     public ProductEntities findById(Long productId) {
@@ -62,7 +59,7 @@ public class ProductService {
         return productEntities.get();
     }
 
-    @CacheEvict(value = "productDelete", allEntries = true)
+    @CacheEvict(value = "product", allEntries = true)
 //    anotasi ini digunakan untuk menandai method yang akan menghapus data pada cache. Ketika method ini dipanggil,
 //    maka data pada cache dengan key yang sesuai akan dihapus. Anotasi ini memiliki parameter value yang menunjukkan
 //    nama cache yang digunakan untuk menyimpan data, dan parameter allEntries yang menunjukkan apakah semua data pada

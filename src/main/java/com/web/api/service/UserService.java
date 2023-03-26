@@ -47,15 +47,13 @@ public class UserService implements UserDetailsService {
 
     public AuthResponse register(UserRegister userRegister) {
         try {
-
-
-            var userDetails = new UserEntities.UserEntitiesBuilder()
-                    .setFirstName(userRegister.getFirstName())
-                    .setLastName(userRegister.getLastName())
-                    .setFullName(userRegister.getFullName())
-                    .setUserEmail(userRegister.getUserEmail())
-                    .setPassword(passwordEncoder.encode(userRegister.getPassword()))
-                    .setRole(UserRole.USER)
+            var userDetails = UserEntities.builder()
+                    .firstName(userRegister.getFirstName())
+                    .lastName(userRegister.getLastName())
+                    .fullName(userRegister.getFullName())
+                    .userEmail(userRegister.getUserEmail())
+                    .password(passwordEncoder.encode(userRegister.getPassword()))
+                    .role(UserRole.USER)
                     .build();
             userRepo.save(userDetails);
 
@@ -75,7 +73,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    @Cacheable(value = "userLogin", key = "#request.getEmail()")
+    @Cacheable(value = "user", key = "#request.getEmail()")
     public AuthResponse authenticate(LoginRequest request) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
