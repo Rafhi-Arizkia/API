@@ -2,11 +2,17 @@ package com.web.api.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_supplier")
 public class SupplierEntities extends BaseEntities<String> implements Serializable {
@@ -27,56 +33,4 @@ public class SupplierEntities extends BaseEntities<String> implements Serializab
     @JsonIgnoreProperties("SupplierProduct")
     private Set<ProductEntities> productSupplier;
 
-    //    Constructor
-    public SupplierEntities(Long supplierId, String supplierName, String supplierAddress, String supplierEmail) {
-        this.supplierId = supplierId;
-        this.supplierName = supplierName;
-        this.supplierAddress = supplierAddress;
-        this.supplierEmail = supplierEmail;
-    }
-
-    public SupplierEntities() {
-    }
-
-    //    Getter Setter
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    public String getSupplierName() {
-        return supplierName;
-    }
-
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
-    }
-
-    public String getSupplierAddress() {
-        return supplierAddress;
-    }
-
-    public void setSupplierAddress(String supplierAddress) {
-        this.supplierAddress = supplierAddress;
-    }
-
-    public String getSupplierEmail() {
-        return this.supplierEmail;
-    }
-
-    public void setSupplierEmail(String supplierEmail) {
-        this.supplierEmail = supplierEmail;
-    }
-//    Getter Setter Product
-
-    public Set<ProductEntities> getProductSupplier() {
-        return productSupplier;
-    }
-
-    public void setProductSupplier(Set<ProductEntities> productSupplier) {
-        this.productSupplier = productSupplier;
-    }
 }
