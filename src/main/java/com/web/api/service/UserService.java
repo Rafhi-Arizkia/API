@@ -7,7 +7,10 @@ import com.web.api.model.entities.UserEntities;
 import com.web.api.model.entities.UserRole;
 import com.web.api.model.repo.UserRepo;
 import com.web.api.security.jwt.JwtService;
+import org.hibernate.cache.CacheException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
@@ -37,7 +40,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     @Lazy
     private AuthenticationManager authenticationManager;
-
+    @Autowired
+    private CacheManager cacheManager;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -75,13 +79,23 @@ public class UserService implements UserDetailsService {
 
     @Cacheable(value = "user", key = "#request.getEmail()")
     public AuthResponse authenticate(LoginRequest request) {
+        Cache cache = cacheManager.getCache("user");
+        Object value = null;
         try {
+            if (cache != null){
+                value = cache.get(request.getEmail());
+            }
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     request.getEmail(),
                     request.getPassword()
             ));
         } catch (BadCredentialsException ex) {
             throw new IllegalArgumentException("Email atau password salah");
+        } catch (Exception e){
+            throw new CacheException("Terjadi kesalahan memproses cache"+ e.getMessage());
+        }
+        if (value == null){
+            throw new CacheException("cache entry not found");
         }
 
         var userOptional = userRepo.findByUserEmail(request.getEmail());
