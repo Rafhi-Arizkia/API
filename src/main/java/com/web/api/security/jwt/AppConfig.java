@@ -17,17 +17,30 @@ public class AppConfig {
         this.userService = userService;
     }
 
+    /**
+     * Untuk melakukan hashing pada password yang dimasukkan oleh user
+     * @return BCryptPasswordEncoder()  yang digunakan untuk melakukan encoding password dalam aplikasi
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Method yang mengembalikan bean AuthenticationProvider
+     * yang digunakan untuk melakukan autentikasi pengguna
+     * @return daoAuthenticationProvider yang digunakan untuk autentikasi pengguna
+     */
     @Bean
     public AuthenticationProvider authenticationProvider(){
+        // membuat objek DaoAuthenticationProvider
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        // menetapkan userService sebagai UserDetailsService pada DaoAuthenticationProvider
         daoAuthenticationProvider.setUserDetailsService(userService);
+        // menetapkan passwordEncoder yang digunakan pada DaoAuthenticationProvider
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        return  daoAuthenticationProvider;
+        // mengembalikan objek DaoAuthenticationProvider yang telah di-set-up
+        return daoAuthenticationProvider;
     }
 
 }
