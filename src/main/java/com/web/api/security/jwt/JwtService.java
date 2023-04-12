@@ -34,6 +34,15 @@ public class JwtService {
     }
 
     /**
+     * Mendapatkan kunci rahasia yang digunakan untuk menandatangani token JWT
+     * @return SECRET_KEY kunci rahasia
+     */
+    private Key getSignInkey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    /**
      * Berfungsi untuk Mengesktrak semua claim yang terkandung dalam token JWT
      * @param token  Token JWT
      * @return semua claim dari token JWT
@@ -60,14 +69,6 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    /**
-     * Mendapatkan kunci rahasia yang digunakan untuk menandatangani token JWT
-     * @return SECRET_KEY kunci rahasia
-     */
-    private Key getSignInkey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
 
     /**
      * Menghasilkan token JWT untuk pengguna yang terauntentikasi
